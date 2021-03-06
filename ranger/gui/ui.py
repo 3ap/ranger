@@ -357,7 +357,8 @@ class UI(  # pylint: disable=too-many-instance-attributes,too-many-public-method
         self.termsize = self.win.getmaxyx()
         y, x = self.termsize
 
-        self.browser.resize(self.settings.status_bar_on_top and 2 or 1, 0, y - 2, x)
+        browsery = self.settings.status_bar_on_top and 2 or 1
+        self.browser.resize(browsery, 0, y - 1 - browsery -5, x)
         self.taskview.resize(1, 0, y - 2, x)
         self.pager.resize(1, 0, y - 2, x)
         self.titlebar.resize(0, 0, 1, x)
