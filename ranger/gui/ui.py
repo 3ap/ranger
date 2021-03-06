@@ -79,6 +79,7 @@ class UI(  # pylint: disable=too-many-instance-attributes,too-many-public-method
         self._viewmode = None
         self.taskview = None
         self.status = None
+        self.zar = None
         self.console = None
         self.pager = None
         self.multiplexer = None
@@ -285,6 +286,7 @@ class UI(  # pylint: disable=too-many-instance-attributes,too-many-public-method
         from ranger.gui.widgets.statusbar import StatusBar
         from ranger.gui.widgets.taskview import TaskView
         from ranger.gui.widgets.pager import Pager
+        from ranger.gui.widgets.zar import Zar
 
         # Create a titlebar
         self.titlebar = TitleBar(self.win)
@@ -315,6 +317,9 @@ class UI(  # pylint: disable=too-many-instance-attributes,too-many-public-method
         self.pager = Pager(self.win)
         self.pager.visible = False
         self.add_child(self.pager)
+
+        self.zar = Zar(self.win)
+        self.add_child(self.zar)
 
     @lazy_property
     def vcsthread(self):
@@ -364,6 +369,7 @@ class UI(  # pylint: disable=too-many-instance-attributes,too-many-public-method
         self.titlebar.resize(0, 0, 1, x)
         self.status.resize(self.settings.status_bar_on_top and 1 or y - 1, 0, 1, x)
         self.console.resize(y - 1, 0, 1, x)
+        self.zar.resize(y - 1, 0, 1, x)
 
     def draw(self):
         """Draw all objects in the container"""
